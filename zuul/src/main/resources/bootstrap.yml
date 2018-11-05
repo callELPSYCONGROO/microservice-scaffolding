@@ -1,0 +1,72 @@
+server:
+  port: ${SERVER_PORT:10002}
+
+spring:
+  application:
+    name: ${APPLICATION_NAME:zuul}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${COMPONENT_DISCOVER_URL:http://127.0.0.1:10001/eureka/}
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}-${eureka.instance.ip-address}:${server.port}
+    ip-address: ${EUREKA_INSTANCE_IP_ADDRESS:127.0.0.1}
+
+zuul:
+  host:
+    # 连接时间semaphores
+    connect-timeout-millis: 3000
+    # 每个router最大连接数
+    max-per-route-connections: 100
+    # 最大连接数
+    max-total-connections: 1000
+     # socket超时时间
+    socket-timeout-millis: 3000
+  prefix: /api       # 路由前缀
+  routes:
+    basedata:
+      # 请求映射路径
+      path: /demo/**
+      # 服务名称
+      serviceId: demo
+  ignored-services: eureka,zuul,admin
+
+# 启用hystrix熔断
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+      default:
+        execution:
+          timeout:
+            enabled: false
+          isolation:
+            thread:
+              # Hystrix超时时间，熔断时间应当大于ribbon的读取时间+连接时间
+              timeoutInMilliseconds: 45000
+
+ribbon:
+  # 处理时间
+  ReadTimeout: 10000
+  # 连接时间
+  ConnectTimeout: 11000
+  # 最大自动重试次数
+  MaxAutoRetries: 0
+  # 换实例重试次数
+  MaxAutoRetriesNextServer: 1
+  # 最大http连接数
+  MaxTotalHttpConnections: 1000
+  # 每个host连接数
+  MaxConnectionsPerHost: 500
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

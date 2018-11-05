@@ -1,0 +1,82 @@
+server:
+  port: ${SERVER_PORT:10004}
+
+spring:
+  application:
+    name: ${APPLICATION_NAME:demo}
+  datasource:
+      username: ${BASEDATA_DB_USERNAME:demo}
+      password: ${BASEDATA_DB_PASSWORD:demo}
+      url: ${BASEDATA_DB_URL:jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false}
+      druid:
+        filters: stat        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        driver-class-name: com.mysql.jdbc.Driver
+        initial-size: 1
+        min-idle: 1
+        max-active: 30
+        max-wait: 10000
+        time-between-eviction-runs-millis: 20000        # 配置一个连接在池中生存的时间，单位是毫秒
+        validation-query: SELECT 1
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        filter:
+          stat:
+            log-slow-sql: true
+            slow-sql-millis: 5000
+            merge-sql: true
+        max-pool-prepared-statement-per-connection-size: 20
+        connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.wuhenjian.microservicescaffolding.service.domain.entity
+  configuration:
+    autoRuntimeDialect: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${COMPONENT_DISCOVER_URL:http://127.0.0.1:10001/eureka/}
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}-${eureka.instance.ip-address}:${server.port}
+    ip-address: ${EUREKA_INSTANCE_IP_ADDRESS:127.0.0.1}
+
+# 启用hystrix熔断
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+      default:
+        execution:
+          timeout:
+            enabled: false
+          isolation:
+            thread:
+              # Hystrix超时时间，熔断时间应当大于ribbon的读取时间+连接时间
+              timeoutInMilliseconds: 45000
+
+ribbon:
+  # 处理时间
+  ReadTimeout: 10000
+  # 连接时间
+  ConnectTimeout: 11000
+  # 最大自动重试次数
+  MaxAutoRetries: 0
+  # 换实例重试次数
+  MaxAutoRetriesNextServer: 1
+  # 最大http连接数
+  MaxTotalHttpConnections: 1000
+  # 每个host连接数
+  MaxConnectionsPerHost: 500
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

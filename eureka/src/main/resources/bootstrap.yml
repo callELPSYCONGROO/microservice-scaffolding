@@ -1,0 +1,29 @@
+server:
+  port: ${SERVER_PORT:10001}
+
+spring:
+  application:
+    name: ${APPLICATION_NAME:eureka}
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}-${eureka.instance.ip-address}:${server.port}
+    ip-address: ${EUREKA_INSTANCE_IP_ADDRESS:127.0.0.1}
+    lease-renewal-interval-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: ${COMPONENT_DISCOVER_URL:http://127.0.0.1:10001/eureka/}
+    fetch-registry: false
+    register-with-eureka: false
+  server:
+    renewal-percent-threshold: 0.5
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
