@@ -7,7 +7,7 @@ master分支只更新README.md，用于说明。
 
 * eureka-zuul，注册中心为eureka，网关为zuul
 
-* eureka-zuul/dynamic-route，注册中心为eureka，网关为zuul
+* dynamic-route，注册中心为eureka，网关为zuul
 
     * 实现了zuul动态路由配置及动态路由
     
