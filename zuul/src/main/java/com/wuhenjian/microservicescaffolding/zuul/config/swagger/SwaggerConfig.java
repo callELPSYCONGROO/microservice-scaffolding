@@ -1,4 +1,4 @@
-package com.wuhenjian.microservicescaffolding.zuul.config;
+package com.wuhenjian.microservicescaffolding.zuul.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

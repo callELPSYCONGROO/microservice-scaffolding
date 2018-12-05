@@ -1,4 +1,4 @@
-package com.wuhenjian.microservicescaffolding.service.config;
+package com.wuhenjian.microservicescaffolding.service.config.druid;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 

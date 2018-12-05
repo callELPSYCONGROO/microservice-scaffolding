@@ -1,4 +1,4 @@
-package com.wuhenjian.microservicescaffolding.service.config;
+package com.wuhenjian.microservicescaffolding.service.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
