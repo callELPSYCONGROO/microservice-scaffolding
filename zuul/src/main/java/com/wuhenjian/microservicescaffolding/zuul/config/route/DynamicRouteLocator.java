@@ -1,6 +1,6 @@
 package com.wuhenjian.microservicescaffolding.zuul.config.route;
 
-import com.bici.saas.common.util.string.StringUtil;
+import com.wuhenjian.microservicescaffolding.zuul.util.StringUtil;
 import org.springframework.cloud.netflix.zuul.filters.RefreshableRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.SimpleRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
@@ -17,7 +17,7 @@ public class DynamicRouteLocator extends SimpleRouteLocator implements Refreshab
 
 	/**
 	 * 是否启用动态路由。
-	 * 在配置文件中：saas.routes.dynamic.enabled，默认为false
+	 * 在配置文件中：gateway.routes.dynamic.enabled，默认为false
 	 */
 	private boolean enabled;
 

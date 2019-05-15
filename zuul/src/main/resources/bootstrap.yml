@@ -70,3 +70,10 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+gateway:
+  routes:
+    dynamic:
+      enabled: ${GATEWAY_ROUTES_DYNAMIC_ENABLED:false}
+  internal: ${GATEWAY_INTERNAL:true}
+  invalid-path: ${GATEWAY_INVALID_PATH:remote,feign}

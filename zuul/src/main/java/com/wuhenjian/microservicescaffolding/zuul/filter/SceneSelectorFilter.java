@@ -1,9 +1,9 @@
 package com.wuhenjian.microservicescaffolding.zuul.filter;
 
-import com.bici.saas.gateway.util.RequestUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import com.wuhenjian.microservicescaffolding.zuul.util.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.netflix.zuul.filters.pre.PreDecorationFilter;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;

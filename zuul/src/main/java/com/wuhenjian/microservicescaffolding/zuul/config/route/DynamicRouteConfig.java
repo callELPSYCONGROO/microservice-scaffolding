@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DynamicRouteConfig {
 
-    @Value("${saas.routes.dynamic.enabled}")
+    @Value("${gateway.routes.dynamic.enabled}")
     private boolean enabledDynamicRoute;
 
     /**

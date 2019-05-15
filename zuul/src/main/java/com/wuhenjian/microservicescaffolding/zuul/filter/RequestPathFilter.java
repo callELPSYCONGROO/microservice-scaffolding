@@ -20,11 +20,11 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestPathFilter extends ZuulFilter {
 
 	/** 网关是否过滤带remote关键字的请求 */
-	@Value("${saas.gateway.internal}")
+	@Value("${gateway.internal}")
 	private boolean internal;
 
 	/** 网关过滤关键字列表，使用英文逗号分割多个关键字 */
-	@Value("${saas.gateway.invalid-path}")
+	@Value("${gateway.invalid-path}")
 	private String invalidPaths;
 
 	@Override
