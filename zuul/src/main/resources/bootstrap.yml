@@ -70,3 +70,7 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+gateway:
+  internal: ${GATEWAY_INTERNAL:true}
+  invalid-path: ${GATEWAY_INVALID_PATH:remote,feign}
