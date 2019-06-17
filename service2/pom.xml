@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wuhenjian.microservice-scaffolding</groupId>
-    <artifactId>admin</artifactId>
+    <artifactId>service2</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>admin</name>
-    <description>服务监控</description>
+    <name>service2</name>
+    <description>服务2</description>
 
     <parent>
         <groupId>com.wuhenjian</groupId>
@@ -19,19 +19,45 @@
     </parent>
 
     <properties>
-        <spring-boot-admin.version>2.1.0-SNAPSHOT</spring-boot-admin.version>
+        <druid.version>1.1.17</druid.version>
+        <mybatis-spring-boot.version>2.0.1</mybatis-spring-boot.version>
+        <pagehelper.spring.boot>1.2.12</pagehelper.spring.boot>
     </properties>
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
-            <version>2.0.2</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>${spring-cloud-netflix.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- MyBatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-spring-boot.version}</version>
+        </dependency>
+        <!-- PageHelper分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.spring.boot}</version>
         </dependency>
     </dependencies>
 
@@ -48,7 +74,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>admin</finalName>
+        <finalName>service2</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -56,4 +82,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

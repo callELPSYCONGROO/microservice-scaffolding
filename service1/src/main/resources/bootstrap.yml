@@ -1,0 +1,74 @@
+server:
+  port: ${SERVER_PORT:10004}
+
+spring:
+  application:
+    name: ${APPLICATION_NAME:service1}
+  datasource:
+    username: ${DB_USERNAME:demo}
+    password: ${DB_PASSWORD:demo}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false}
+    druid:
+      filters: stat
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 1
+      min-idle: 1
+      max-active: 30
+      max-wait: 10000
+      time-between-eviction-runs-millis: 20000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 5000
+          merge-sql: true
+      max-pool-prepared-statement-per-connection-size: 20
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.wuhenjian.microservicescaffolding.service1.domain.entity
+  configuration:
+    autoRuntimeDialect: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${COMPONENT_DISCOVER_URL:http://127.0.0.1:10001/eureka/}
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}-${eureka.instance.ip-address}:${server.port}
+    ip-address: ${EUREKA_INSTANCE_IP_ADDRESS:127.0.0.1}
+
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+
+ribbon:
+  ReadTimeout: 2000
+  ConnectTimeout: 2000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  MaxTotalHttpConnections: 1000
+  MaxConnectionsPerHost: 500
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

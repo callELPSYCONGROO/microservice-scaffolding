@@ -1,16 +1,17 @@
-package com.wuhenjian.microservicescaffolding.admin;
+package com.wuhenjian.microservicescaffolding.config;
 
-import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.config.server.EnableConfigServer;
 
-@EnableAdminServer
+@EnableConfigServer
 @EnableDiscoveryClient
 @SpringBootApplication
-public class AdminApplication {
+public class ConfigApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AdminApplication.class, args);
+		SpringApplication.run(ConfigApplication.class, args);
 	}
+
 }
