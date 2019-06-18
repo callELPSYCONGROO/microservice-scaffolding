@@ -59,6 +59,12 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pagehelper.spring.boot}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.wuhenjian</groupId>
+            <artifactId>util</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

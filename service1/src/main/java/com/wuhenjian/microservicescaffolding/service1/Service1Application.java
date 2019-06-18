@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients
 @MapperScan(basePackages = "com.wuhenjian.microservicescaffolding.service1.dao")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.wuhenjian")
 public class Service1Application {
 
 	public static void main(String[] args) {

@@ -1,37 +1,28 @@
 package com.wuhenjian.microservicescaffolding.service1.dao;
 
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.A;
-import java.util.List;
-
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.ACriteria;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.ADTO;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.A;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AMapper {
-    int countByCriteria(ACriteria criteria);
-
-    int deleteByCriteria(ACriteria criteria);
 
     int deleteByPrimaryKey(Integer aid);
 
     int insert(A record);
 
-    int insertSelective(A record);
+    int insertBatch(@Param("records") List<A> records);
 
-    List<A> selectByCriteria(ACriteria criteria);
+    int insertSelective(A record);
 
     A selectByPrimaryKey(Integer aid);
 
-    int updateByCriteriaSelective(@Param("record") A record, @Param("criteria") ACriteria criteria);
-
-    int updateByCriteria(@Param("record") A record, @Param("criteria") ACriteria criteria);
-
     int updateByPrimaryKeySelective(A record);
-
-    int updateByPrimaryKey(A record);
 
     int countByModel(A model);
 
-    List<A> selectByModel(A model);
+    List<ADTO> selectByModel(A model);
 }

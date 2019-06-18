@@ -1,6 +1,6 @@
 package com.wuhenjian.microservicescaffolding.service1.controller;
 
-import com.wuhenjian.microservicescaffolding.service1.domain.dto.ResultDTO;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.ResultDTO;
 import com.wuhenjian.microservicescaffolding.service1.service.DemoService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

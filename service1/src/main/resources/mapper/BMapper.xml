@@ -1,91 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wuhenjian.microservicescaffolding.service1.dao.BMapper" >
-  <resultMap id="BaseResultMap" type="com.wuhenjian.microservicescaffolding.service1.domain.entity.B" >
+<mapper namespace="com.wuhenjian.microservicescaffolding.service2.dao.BMapper" >
+  <resultMap id="BaseResultMap" type="com.wuhenjian.microservicescaffolding.util.domain.entity.B" >
     <id column="bid" property="bid" jdbcType="INTEGER" />
     <result column="bname" property="bname" jdbcType="VARCHAR" />
     <result column="aid" property="aid" jdbcType="INTEGER" />
     <result column="btime" property="btime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Criteria_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Criteria_Where_Clause" >
-    <where >
-      <foreach collection="criteria.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
     bid, bname, aid, btime
   </sql>
-  <select id="selectByCriteria" resultMap="BaseResultMap" parameterType="com.wuhenjian.microservicescaffolding.service1.domain.entity.BCriteria" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from t_b
-    <if test="_parameter != null" >
-      <include refid="Criteria_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-    <if test="limitStart != null and limitStart>=0" >
-      limit #{limitStart} , #{limitEnd}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -96,13 +20,7 @@
     delete from t_b
     where bid = #{bid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByCriteria" parameterType="com.wuhenjian.microservicescaffolding.service1.domain.entity.BCriteria" >
-    delete from t_b
-    <if test="_parameter != null" >
-      <include refid="Criteria_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.wuhenjian.microservicescaffolding.service1.domain.entity.B" >
+  <insert id="insert" parameterType="com.wuhenjian.microservicescaffolding.util.domain.entity.B" >
     <selectKey resultType="java.lang.Integer" keyProperty="bid" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -111,7 +29,7 @@
     values (#{bname,jdbcType=VARCHAR}, #{aid,jdbcType=INTEGER}, #{btime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.wuhenjian.microservicescaffolding.service1.domain.entity.B" >
+  <insert id="insertSelective" parameterType="com.wuhenjian.microservicescaffolding.util.domain.entity.B" >
     <selectKey resultType="java.lang.Integer" keyProperty="bid" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -139,43 +57,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByCriteria" parameterType="com.wuhenjian.microservicescaffolding.service1.domain.entity.BCriteria" resultType="java.lang.Integer" >
-    select count(*) from t_b
-    <if test="_parameter != null" >
-      <include refid="Criteria_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByCriteriaSelective" parameterType="map" >
-    update t_b
-    <set >
-      <if test="record.bid != null" >
-        bid = #{record.bid,jdbcType=INTEGER},
-      </if>
-      <if test="record.bname != null" >
-        bname = #{record.bname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.aid != null" >
-        aid = #{record.aid,jdbcType=INTEGER},
-      </if>
-      <if test="record.btime != null" >
-        btime = #{record.btime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Criteria_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByCriteria" parameterType="map" >
-    update t_b
-    set bid = #{record.bid,jdbcType=INTEGER},
-      bname = #{record.bname,jdbcType=VARCHAR},
-      aid = #{record.aid,jdbcType=INTEGER},
-      btime = #{record.btime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Criteria_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wuhenjian.microservicescaffolding.service1.domain.entity.B" >
+  <insert id="insertBatch">
+    INSERT INTO t_b
+    (bname, aid, btime) VALUES
+    <foreach collection="records" item="record" separator=",">
+      (#{record.bname}, #{record.aid}, #{record.btime})
+    </foreach>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuhenjian.microservicescaffolding.util.domain.entity.B" >
     update t_b
     <set >
       <if test="bname != null" >
@@ -188,13 +77,6 @@
         btime = #{btime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where bid = #{bid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wuhenjian.microservicescaffolding.service1.domain.entity.B" >
-    update t_b
-    set bname = #{bname,jdbcType=VARCHAR},
-      aid = #{aid,jdbcType=INTEGER},
-      btime = #{btime,jdbcType=TIMESTAMP}
     where bid = #{bid,jdbcType=INTEGER}
   </update>
   <sql id="Model_Where_Clause" >
@@ -213,13 +95,13 @@
       </if>
     </where>
   </sql>
-  <select id="countByModel" parameterType="com.wuhenjian.microservicescaffolding.service1.domain.entity.B" resultType="java.lang.Integer" >
+  <select id="countByModel" parameterType="com.wuhenjian.microservicescaffolding.util.domain.entity.B" resultType="java.lang.Integer" >
     select count(*) from t_b
     <if test="_parameter != null" >
       <include refid="Model_Where_Clause" />
     </if>
   </select>
-  <select id="selectByModel" resultMap="BaseResultMap" parameterType="com.wuhenjian.microservicescaffolding.service1.domain.entity.B" >
+  <select id="selectByModel" resultType="com.wuhenjian.microservicescaffolding.util.domain.dto.BDTO" parameterType="com.wuhenjian.microservicescaffolding.util.domain.entity.B" >
     select
     <include refid="Base_Column_List" />
     from t_b

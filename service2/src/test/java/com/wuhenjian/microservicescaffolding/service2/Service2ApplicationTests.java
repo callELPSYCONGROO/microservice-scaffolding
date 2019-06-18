@@ -1,11 +1,11 @@
 package com.wuhenjian.microservicescaffolding.service2;
 
+import com.wuhenjian.microservicescaffolding.util.domain.entity.A;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.B;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.C;
 import com.wuhenjian.microservicescaffolding.service2.dao.AMapper;
 import com.wuhenjian.microservicescaffolding.service2.dao.BMapper;
 import com.wuhenjian.microservicescaffolding.service2.dao.CMapper;
-import com.wuhenjian.microservicescaffolding.service2.domain.entity.A;
-import com.wuhenjian.microservicescaffolding.service2.domain.entity.B;
-import com.wuhenjian.microservicescaffolding.service2.domain.entity.C;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

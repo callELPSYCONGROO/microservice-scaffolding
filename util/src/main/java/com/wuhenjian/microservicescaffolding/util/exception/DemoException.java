@@ -1,7 +1,9 @@
-package com.wuhenjian.microservicescaffolding.service2.exception;
+package com.wuhenjian.microservicescaffolding.util.exception;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * @author 無痕剑
@@ -9,6 +11,8 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class DemoException extends RuntimeException {
 
 	private Integer code;

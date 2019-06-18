@@ -1,36 +1,28 @@
 package com.wuhenjian.microservicescaffolding.service1.dao;
 
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.B;
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.BCriteria;
-import java.util.List;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.BDTO;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.B;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface BMapper {
-    int countByCriteria(BCriteria criteria);
-
-    int deleteByCriteria(BCriteria criteria);
 
     int deleteByPrimaryKey(Integer bid);
 
     int insert(B record);
 
-    int insertSelective(B record);
+    int insertBatch(@Param("records") List<B> records);
 
-    List<B> selectByCriteria(BCriteria criteria);
+    int insertSelective(B record);
 
     B selectByPrimaryKey(Integer bid);
 
-    int updateByCriteriaSelective(@Param("record") B record, @Param("criteria") BCriteria criteria);
-
-    int updateByCriteria(@Param("record") B record, @Param("criteria") BCriteria criteria);
-
     int updateByPrimaryKeySelective(B record);
-
-    int updateByPrimaryKey(B record);
 
     int countByModel(B model);
 
-    List<B> selectByModel(B model);
+    List<BDTO> selectByModel(B model);
 }

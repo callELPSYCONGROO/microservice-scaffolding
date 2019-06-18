@@ -1,11 +1,11 @@
 package com.wuhenjian.microservicescaffolding.service1.service;
 
-import com.wuhenjian.microservicescaffolding.service1.domain.dto.ADTO;
-import com.wuhenjian.microservicescaffolding.service1.domain.dto.BDTO;
-import com.wuhenjian.microservicescaffolding.service1.domain.dto.CDTO;
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.A;
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.B;
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.C;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.ADTO;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.BDTO;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.CDTO;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.A;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.B;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.C;
 
 import java.util.List;
 

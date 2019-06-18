@@ -1,4 +1,4 @@
-package com.wuhenjian.microservicescaffolding.service2.domain.entity;
+package com.wuhenjian.microservicescaffolding.util.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

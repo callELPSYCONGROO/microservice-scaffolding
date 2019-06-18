@@ -1,7 +1,7 @@
 package com.wuhenjian.microservicescaffolding.service1.handler;
 
-import com.wuhenjian.microservicescaffolding.service1.domain.dto.ResultDTO;
-import com.wuhenjian.microservicescaffolding.service1.exception.DemoException;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.ResultDTO;
+import com.wuhenjian.microservicescaffolding.util.exception.DemoException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -33,7 +33,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(DemoException.class)
 	public ResultDTO demoExceptionHandler(DemoException e) {
 		log.error(e.getMsg(), e);
-		return ResultDTO.builder().code(500).msg(e.getMsg()).build();
+		return new ResultDTO(500, e.getMsg(), null);
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(TypeMismatchException.class)
 	public ResultDTO typeMismatchExceptionHandler(TypeMismatchException e) {
 		log.error(e.getMessage(), e);
-		return ResultDTO.builder().code(500).msg(e.getMessage()).build();
+		return new ResultDTO(500, e.getMessage(), null);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(ServletRequestBindingException.class)
 	public ResultDTO servletRequestBindingExceptionHandler(ServletRequestBindingException e) {
 		log.error(e.getMessage(), e);
-		return ResultDTO.builder().code(500).msg(e.getMessage()).build();
+		return new ResultDTO(500, e.getMessage(), null);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class ControllerExceptionHandler {
 		StringBuilder allErrorMessage = new StringBuilder();
 		errorMessageSet.forEach(err -> allErrorMessage.append(err).append("；"));
 		String msg = errorMessageSet.size() == 0 ? "fail" : allErrorMessage.deleteCharAt(allErrorMessage.length() - 1).toString();
-		return ResultDTO.builder().code(500).msg(msg).build();
+		return new ResultDTO(500, msg, null);
 	}
 
 	@ExceptionHandler(BindException.class)
@@ -78,7 +78,7 @@ public class ControllerExceptionHandler {
 		StringBuilder allErrorMessage = new StringBuilder();
 		errorMessageSet.forEach(err -> allErrorMessage.append(err).append("；"));
 		String msg = errorMessageSet.size() == 0 ? "fail" : allErrorMessage.deleteCharAt(allErrorMessage.length() - 1).toString();
-		return ResultDTO.builder().code(500).msg(msg).build();
+		return new ResultDTO(500, msg, null);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ResultDTO httpMessageNotReadableExceptionHandler(HttpMessageNotReadableException e) {
 		log.error(e.getMessage(), e);
-		return ResultDTO.builder().code(500).msg(e.getMessage()).build();
+		return new ResultDTO(500, e.getMessage(), null);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(HttpMessageNotWritableException.class)
 	public ResultDTO httpMessageNotReadableExceptionHandler(HttpMessageNotWritableException e) {
 		log.error(e.getMessage(), e);
-		return ResultDTO.builder().code(500).msg(e.getMessage()).build();
+		return new ResultDTO(500, e.getMessage(), null);
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public ResultDTO httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException e) {
 		log.error(e.getMessage(), e);
-		return ResultDTO.builder().code(500).msg(e.getMessage()).build();
+		return new ResultDTO(500, e.getMessage(), null);
 	}
 
 	/**
@@ -114,6 +114,6 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ResultDTO exceptionHandler(Exception e) {
 		log.error(e.getMessage(), e);
-		return ResultDTO.builder().code(500).msg(e.getMessage()).build();
+		return new ResultDTO(500, e.getMessage(), null);
 	}
 }

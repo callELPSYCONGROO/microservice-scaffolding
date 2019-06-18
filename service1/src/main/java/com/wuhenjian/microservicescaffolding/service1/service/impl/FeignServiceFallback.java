@@ -1,7 +1,7 @@
 package com.wuhenjian.microservicescaffolding.service1.service.impl;
 
-import com.wuhenjian.microservicescaffolding.service1.domain.dto.ResultDTO;
-import com.wuhenjian.microservicescaffolding.service1.exception.DemoException;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.ResultDTO;
+import com.wuhenjian.microservicescaffolding.util.exception.DemoException;
 import com.wuhenjian.microservicescaffolding.service1.service.FeignService;
 import org.springframework.stereotype.Component;
 

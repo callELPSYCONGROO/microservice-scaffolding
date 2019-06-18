@@ -1,91 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuhenjian.microservicescaffolding.service2.dao.CMapper" >
-  <resultMap id="BaseResultMap" type="com.wuhenjian.microservicescaffolding.service2.domain.entity.C" >
+  <resultMap id="BaseResultMap" type="com.wuhenjian.microservicescaffolding.util.domain.entity.C" >
     <id column="cid" property="cid" jdbcType="INTEGER" />
     <result column="cname" property="cname" jdbcType="VARCHAR" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
     <result column="bid" property="bid" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Criteria_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Criteria_Where_Clause" >
-    <where >
-      <foreach collection="criteria.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
     cid, cname, ctime, bid
   </sql>
-  <select id="selectByCriteria" resultMap="BaseResultMap" parameterType="com.wuhenjian.microservicescaffolding.service2.domain.entity.CCriteria" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from t_c
-    <if test="_parameter != null" >
-      <include refid="Criteria_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-    <if test="limitStart != null and limitStart>=0" >
-      limit #{limitStart} , #{limitEnd}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -96,13 +20,7 @@
     delete from t_c
     where cid = #{cid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByCriteria" parameterType="com.wuhenjian.microservicescaffolding.service2.domain.entity.CCriteria" >
-    delete from t_c
-    <if test="_parameter != null" >
-      <include refid="Criteria_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.wuhenjian.microservicescaffolding.service2.domain.entity.C" >
+  <insert id="insert" parameterType="com.wuhenjian.microservicescaffolding.util.domain.entity.C" >
     <selectKey resultType="java.lang.Integer" keyProperty="cid" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -111,7 +29,7 @@
     values (#{cname,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, #{bid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.wuhenjian.microservicescaffolding.service2.domain.entity.C" >
+  <insert id="insertSelective" parameterType="com.wuhenjian.microservicescaffolding.util.domain.entity.C" >
     <selectKey resultType="java.lang.Integer" keyProperty="cid" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -146,43 +64,7 @@
       (#{record.cname}, #{record.ctime}, #{record.bid})
     </foreach>
   </insert>
-  <select id="countByCriteria" parameterType="com.wuhenjian.microservicescaffolding.service2.domain.entity.CCriteria" resultType="java.lang.Integer" >
-    select count(*) from t_c
-    <if test="_parameter != null" >
-      <include refid="Criteria_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByCriteriaSelective" parameterType="map" >
-    update t_c
-    <set >
-      <if test="record.cid != null" >
-        cid = #{record.cid,jdbcType=INTEGER},
-      </if>
-      <if test="record.cname != null" >
-        cname = #{record.cname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ctime != null" >
-        ctime = #{record.ctime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.bid != null" >
-        bid = #{record.bid,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Criteria_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByCriteria" parameterType="map" >
-    update t_c
-    set cid = #{record.cid,jdbcType=INTEGER},
-      cname = #{record.cname,jdbcType=VARCHAR},
-      ctime = #{record.ctime,jdbcType=TIMESTAMP},
-      bid = #{record.bid,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Criteria_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wuhenjian.microservicescaffolding.service2.domain.entity.C" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuhenjian.microservicescaffolding.util.domain.entity.C" >
     update t_c
     <set >
       <if test="cname != null" >
@@ -195,13 +77,6 @@
         bid = #{bid,jdbcType=INTEGER},
       </if>
     </set>
-    where cid = #{cid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wuhenjian.microservicescaffolding.service2.domain.entity.C" >
-    update t_c
-    set cname = #{cname,jdbcType=VARCHAR},
-      ctime = #{ctime,jdbcType=TIMESTAMP},
-      bid = #{bid,jdbcType=INTEGER}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
   <sql id="Model_Where_Clause" >
@@ -220,13 +95,13 @@
       </if>
     </where>
   </sql>
-  <select id="countByModel" parameterType="com.wuhenjian.microservicescaffolding.service2.domain.entity.C" resultType="java.lang.Integer" >
+  <select id="countByModel" parameterType="com.wuhenjian.microservicescaffolding.util.domain.entity.C" resultType="java.lang.Integer" >
     select count(*) from t_c
     <if test="_parameter != null" >
       <include refid="Model_Where_Clause" />
     </if>
   </select>
-  <select id="selectByModel" resultMap="BaseResultMap" parameterType="com.wuhenjian.microservicescaffolding.service2.domain.entity.C" >
+  <select id="selectByModel" resultType="com.wuhenjian.microservicescaffolding.util.domain.dto.CDTO" parameterType="com.wuhenjian.microservicescaffolding.util.domain.entity.C" >
     select
     <include refid="Base_Column_List" />
     from t_c

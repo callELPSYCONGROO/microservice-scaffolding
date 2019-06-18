@@ -1,15 +1,15 @@
 package com.wuhenjian.microservicescaffolding.service1.service.impl;
 
+import com.wuhenjian.microservicescaffolding.util.JsonUtil;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.ADTO;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.BDTO;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.CDTO;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.A;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.B;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.C;
 import com.wuhenjian.microservicescaffolding.service1.dao.AMapper;
-import com.wuhenjian.microservicescaffolding.service1.domain.dto.ADTO;
-import com.wuhenjian.microservicescaffolding.service1.domain.dto.BDTO;
-import com.wuhenjian.microservicescaffolding.service1.domain.dto.CDTO;
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.A;
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.B;
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.C;
 import com.wuhenjian.microservicescaffolding.service1.service.DemoService;
 import com.wuhenjian.microservicescaffolding.service1.service.FeignService;
-import com.wuhenjian.microservicescaffolding.service1.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,14 +34,16 @@ public class DemoServiceImpl implements DemoService {
 
 	@Override
 	public List<A> getASingle() {
-		return aMapper.selectByModel(null);
+		return aMapper.selectByModel(null)
+				.stream()
+				.map(adto -> (A) adto)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<ADTO> getA() {
-		return aMapper.selectByCriteria(null)
+		return aMapper.selectByModel(null)
 				.stream()
-				.map(a -> (ADTO) a)
 				.peek(aDTO -> aDTO.setBList(getB(aDTO.getAid())))
 				.collect(Collectors.toList());
 	}

@@ -1,6 +1,6 @@
-package com.wuhenjian.microservicescaffolding.service2.domain.dto;
+package com.wuhenjian.microservicescaffolding.util.domain.dto;
 
-import com.wuhenjian.microservicescaffolding.service2.domain.entity.A;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.B;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,13 +10,13 @@ import java.util.List;
 
 /**
  * @author 無痕剑
- * @date 2019/6/18 0:45
+ * @date 2019/6/18 0:58
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ADTO extends A {
+public class BDTO extends B {
 
-	private List<BDTO> bList;
+	private List<CDTO> cList;
 }

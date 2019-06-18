@@ -1,36 +1,28 @@
 package com.wuhenjian.microservicescaffolding.service1.dao;
 
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.C;
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.CCriteria;
-import java.util.List;
+import com.wuhenjian.microservicescaffolding.util.domain.dto.CDTO;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.C;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CMapper {
-    int countByCriteria(CCriteria criteria);
-
-    int deleteByCriteria(CCriteria criteria);
 
     int deleteByPrimaryKey(Integer cid);
 
     int insert(C record);
 
-    int insertSelective(C record);
+    int insertBatch(@Param("records") List<C> records);
 
-    List<C> selectByCriteria(CCriteria criteria);
+    int insertSelective(C record);
 
     C selectByPrimaryKey(Integer cid);
 
-    int updateByCriteriaSelective(@Param("record") C record, @Param("criteria") CCriteria criteria);
-
-    int updateByCriteria(@Param("record") C record, @Param("criteria") CCriteria criteria);
-
     int updateByPrimaryKeySelective(C record);
-
-    int updateByPrimaryKey(C record);
 
     int countByModel(C model);
 
-    List<C> selectByModel(C model);
+    List<CDTO> selectByModel(C model);
 }

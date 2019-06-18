@@ -30,7 +30,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.wuhenjian.microservicescaffolding.service1.domain.entity
+  type-aliases-package: com.wuhenjian.microservicescaffolding.util.domain.entity
   configuration:
     autoRuntimeDialect: true
 

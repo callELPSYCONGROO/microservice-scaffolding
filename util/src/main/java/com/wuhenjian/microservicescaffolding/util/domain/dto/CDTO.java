@@ -1,6 +1,6 @@
-package com.wuhenjian.microservicescaffolding.service1.domain.dto;
+package com.wuhenjian.microservicescaffolding.util.domain.dto;
 
-import com.wuhenjian.microservicescaffolding.service1.domain.entity.C;
+import com.wuhenjian.microservicescaffolding.util.domain.entity.C;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

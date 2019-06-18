@@ -30,7 +30,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.wuhenjian.microservicescaffolding.service1.domain.entity
+  type-aliases-package: com.wuhenjian.microservicescaffolding.util.domain.entity
   configuration:
     autoRuntimeDialect: true
 
@@ -43,6 +43,7 @@ eureka:
     instance-id: ${spring.application.name}-${eureka.instance.ip-address}:${server.port}
     ip-address: ${EUREKA_INSTANCE_IP_ADDRESS:127.0.0.1}
 
+# 启用hystrix熔断
 feign:
   hystrix:
     enabled: true
@@ -53,16 +54,49 @@ hystrix:
         timeout:
           enabled: true
         isolation:
+          # hystrix的thread隔离策略，设置为该值可以获取到当前请求线程
+          strategy: SEMAPHORE
           thread:
-            timeoutInMilliseconds: 5000
+            # Hystrix超时时间，熔断时间应当大于ribbon的读取时间+连接时间
+            timeoutInMilliseconds: 3000
+          semaphore:
+            # 允许到HystrixCommand.run()方法的最大请求数
+            maxConcurrentRequests: 100
+      circuitBreaker:
+        # 当在配置时间窗口内达到此数量的失败后，进行短路，控制单个请求方法窗口时间（见metrics.rollingStats.timeInMilliseconds）内的最大请求数
+        requestVolumeThreshold: 200
+        # 短路多久以后开始尝试是否恢复
+        sleepWindowInMilliseconds: 1
+        # 出错百分比阈值，当达到此阈值后，开始短路
+        errorThresholdPercentage: 50
+      fallback:
+        isolation:
+          semaphore:
+            # 并发最大处理的限制
+            maxConcurrentRequests: 50
+      metrics:
+        rollingStats:
+          # 设置统计滚动窗口的持续时间（以毫秒为单位）
+          timeInMilliseconds: 10000
+          # 设置rollingstatistical窗口划分的桶数。
+          # 以下必须为true - “metrics.rollingStats.timeInMilliseconds%metrics.rollingStats.numBuckets == 0” -否则将抛出异常。
+          numBuckets: 10
+
 
 ribbon:
-  ReadTimeout: 2000
-  ConnectTimeout: 2000
+  # 处理时间
+  ReadTimeout: 1000
+  # 连接时间
+  ConnectTimeout: 1000
+  # 最大自动重试次数
   MaxAutoRetries: 0
+  # 换实例重试次数
   MaxAutoRetriesNextServer: 1
+  # 最大http连接数
   MaxTotalHttpConnections: 1000
+  # 每个host连接数
   MaxConnectionsPerHost: 500
+
 
 management:
   endpoints:

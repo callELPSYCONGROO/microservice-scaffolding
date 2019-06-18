@@ -1,4 +1,4 @@
-package com.wuhenjian.microservicescaffolding.service1.domain.entity;
+package com.wuhenjian.microservicescaffolding.util.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,12 +10,10 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class B implements Serializable {
-    private Integer bid;
-
-    private String bname;
-
+public class A implements Serializable {
     private Integer aid;
 
-    private Date btime;
+    private String aname;
+
+    private Date atime;
 }
