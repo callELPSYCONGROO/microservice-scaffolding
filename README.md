@@ -4,19 +4,17 @@ SpringCloud微服务系统脚手架。
 
 包含：
 
-* eureka注册中心
-
-* zuul网关
+* SpringCloud-Gateway网关
 
 * SpringBoot Admin监控
 
 * demo service 服务
 
-### eureka 注册中心
+### 注册与配置中心
 
-常规注册中心，未做集群配置，集群注册中心暂时不稳定
+使用ALIBABA-NACOS作为注册与配置中心。
 
-### zuul 网关
+### SpringCloud-Gateway 网关
 
 网关中ErrorHandlerController配合ErrorFilter处理了网关层ZuulException的处理，可以将其转换为自定义结果返回。
 
@@ -30,7 +28,7 @@ RequestPathFilter可以进行请求路径拦截，拦截非法请求。
 
 ### demo service 服务
 
-Mybatis + Druid + PageHelper + MySql。
+Mybatis Plus + Druid + MySql。
 
 配置了FeignClient，服务熔断。
 

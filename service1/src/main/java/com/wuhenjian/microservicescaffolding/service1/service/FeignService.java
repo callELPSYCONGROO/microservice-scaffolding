@@ -25,5 +25,5 @@ public interface FeignService {
 	ResultDTO getCSingle();
 
 	@GetMapping("/c")
-	ResultDTO getC(@RequestParam("bId")Integer bId);
+	ResultDTO getC(@RequestParam("bId") Integer bId);
 }

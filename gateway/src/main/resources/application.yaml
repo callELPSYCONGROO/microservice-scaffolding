@@ -1,0 +1,22 @@
+server:
+  port: ${APPLICATION_SERVER_PORT:10001}
+
+spring:
+  application:
+    name: ${APPLICATION_NAME:gateway}
+  cloud:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+      username: app
+      password: app
+      config:
+        file-extension: yaml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS

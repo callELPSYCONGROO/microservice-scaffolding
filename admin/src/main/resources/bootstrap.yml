@@ -5,9 +5,9 @@ spring:
   application:
     name: ${APPLICATION_NAME:admin}
   mail:
-    host: ****
-    username: ${MAIL_USERNAME:***@***.com}
-    password: ${MAIL_PWD:***}
+    host: ${MAIL_HOST}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PWD}
     properties:
       mail:
         smtp:
@@ -20,22 +20,19 @@ spring:
       notify:
         mail:
           # 多个邮箱地址请用 逗号（,）分隔
-          to: ${MAIL_SEND_TO:***@***.com}
-          from: ${MAIL_FROM_FROM:***@***.com}
+          to: ${MAIL_SEND_TO}
+          from: ${MAIL_FROM_FROM}
           # 配置是否启用邮件通知 false是不起用
           enabled: ${SPRING_BOOT_ADMIN_NOTIFY_EMAIL_ENABLED:false}
   security:
       user:
         name: ${SECURITY_USERNAME:admin}
         password: ${SECURITY_PWD:admin}
-eureka:
-  client:
-    service-url:
-      defaultZone: ${COMPONENT_DISCOVER_URL:http://127.0.0.1:10001/eureka/}
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}-${eureka.instance.ip-address}:${server.port}
-    ip-address: ${EUREKA_INSTANCE_IP_ADDRESS:127.0.0.1}
+  cloud:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+      username: app
+      password: app
 
 management:
   endpoints:

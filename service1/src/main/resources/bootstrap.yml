@@ -27,21 +27,13 @@ spring:
           merge-sql: true
       max-pool-prepared-statement-per-connection-size: 20
       connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.wuhenjian.microservicescaffolding.util.domain.entity
-  configuration:
-    autoRuntimeDialect: true
-
-eureka:
-  client:
-    service-url:
-      defaultZone: ${COMPONENT_DISCOVER_URL:http://127.0.0.1:10001/eureka/}
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}-${eureka.instance.ip-address}:${server.port}
-    ip-address: ${EUREKA_INSTANCE_IP_ADDRESS:127.0.0.1}
+  cloud:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+      username: app
+      password: app
+      config:
+        file-extension: yaml
 
 # 启用hystrix熔断
 feign:
@@ -82,7 +74,6 @@ hystrix:
           # 以下必须为true - “metrics.rollingStats.timeInMilliseconds%metrics.rollingStats.numBuckets == 0” -否则将抛出异常。
           numBuckets: 10
 
-
 ribbon:
   # 处理时间
   ReadTimeout: 1000
@@ -96,7 +87,6 @@ ribbon:
   MaxTotalHttpConnections: 1000
   # 每个host连接数
   MaxConnectionsPerHost: 500
-
 
 management:
   endpoints:

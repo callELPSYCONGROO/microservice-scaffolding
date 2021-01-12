@@ -100,7 +100,7 @@ public class ControllerExceptionHandler {
 	}
 
 	/**
-	 * 不支持改请求方法
+	 * 不支持该请求方法
 	 */
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public ResultDTO httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException e) {
