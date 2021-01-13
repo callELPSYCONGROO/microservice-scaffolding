@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>service1</name>
-    <description>服务</description>
+    <description>服务1</description>
 
     <parent>
         <groupId>com.wuhenjian</groupId>
@@ -56,7 +56,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.wuhenjian</groupId>
+            <groupId>com.wuhenjian.microservicescaffolding</groupId>
             <artifactId>util</artifactId>
             <version>1.0</version>
         </dependency>
@@ -68,6 +68,27 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4-legacy</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
