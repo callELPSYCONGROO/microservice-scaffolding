@@ -1,5 +1,7 @@
 package com.wuhenjian.microservicescaffolding.service1.service.impl;
 
+import com.wuhenjian.microservicescaffolding.service1.service.DemoService;
+import com.wuhenjian.microservicescaffolding.service1.service.FeignService;
 import com.wuhenjian.microservicescaffolding.util.JsonUtil;
 import com.wuhenjian.microservicescaffolding.util.domain.dto.ADTO;
 import com.wuhenjian.microservicescaffolding.util.domain.dto.BDTO;
@@ -7,9 +9,8 @@ import com.wuhenjian.microservicescaffolding.util.domain.dto.CDTO;
 import com.wuhenjian.microservicescaffolding.util.domain.entity.A;
 import com.wuhenjian.microservicescaffolding.util.domain.entity.B;
 import com.wuhenjian.microservicescaffolding.util.domain.entity.C;
-import com.wuhenjian.microservicescaffolding.service1.dao.AMapper;
-import com.wuhenjian.microservicescaffolding.service1.service.DemoService;
-import com.wuhenjian.microservicescaffolding.service1.service.FeignService;
+import com.wuhenjian.microservicescaffolding.util.mapper.AMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +22,16 @@ import java.util.stream.Collectors;
  * @date 2019/6/18 0:33
  */
 @Service
+@RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class DemoServiceImpl implements DemoService {
 
 	private final AMapper aMapper;
-	private final FeignService feignService;
 
-	@Autowired
-	public DemoServiceImpl(AMapper aMapper, FeignService feignService) {
-		this.aMapper = aMapper;
-		this.feignService = feignService;
-	}
+	private final FeignService feignService;
 
 	@Override
 	public List<A> getASingle() {
-		return aMapper.selectByModel(null)
+		return aMapper.selectList(null)
 				.stream()
 				.map(adto -> (A) adto)
 				.collect(Collectors.toList());
@@ -42,9 +39,13 @@ public class DemoServiceImpl implements DemoService {
 
 	@Override
 	public List<ADTO> getA() {
-		return aMapper.selectByModel(null)
+		return aMapper.selectList(null)
 				.stream()
-				.peek(aDTO -> aDTO.setBList(getB(aDTO.getAid())))
+				.map(a -> {
+					ADTO adto = (ADTO) a;
+					adto.setBList(getB(a.getAid()));
+					return adto;
+				})
 				.collect(Collectors.toList());
 	}
 

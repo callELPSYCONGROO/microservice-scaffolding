@@ -4,58 +4,15 @@ server:
 spring:
   application:
     name: ${APPLICATION_NAME:service2}
-  datasource:
-    username: ${DB_USERNAME:demo}
-    password: ${DB_PASSWORD:demo}
-    url: ${DB_URL:jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false}
-    druid:
-      filters: stat
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      initial-size: 1
-      min-idle: 1
-      max-active: 30
-      max-wait: 10000
-      time-between-eviction-runs-millis: 20000
-      validation-query: SELECT 1
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      filter:
-        stat:
-          log-slow-sql: true
-          slow-sql-millis: 5000
-          merge-sql: true
-      max-pool-prepared-statement-per-connection-size: 20
-      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
   cloud:
     nacos:
       server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
-      username: app
-      password: app
+      username: nacos
+      password: nacos
       config:
         file-extension: yaml
-
-# 启用hystrix熔断
-feign:
-  hystrix:
-    enabled: true
-hystrix:
-  command:
-    default:
-      execution:
-        timeout:
-          enabled: true
-        isolation:
-          thread:
-            timeoutInMilliseconds: 5000
-
-ribbon:
-  ReadTimeout: 2000
-  ConnectTimeout: 2000
-  MaxAutoRetries: 0
-  MaxAutoRetriesNextServer: 1
-  MaxTotalHttpConnections: 1000
-  MaxConnectionsPerHost: 500
+        name: ${spring.application.name}
+        namespace: ${NACOS_NAMESPACE_ID:localid}
 
 management:
   endpoints:

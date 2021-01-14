@@ -7,16 +7,18 @@ spring:
   cloud:
     nacos:
       server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
-      username: app
-      password: app
+      username: nacos
+      password: nacos
       config:
         file-extension: yaml
+        name: ${spring.application.name}
+        namespace: ${NACOS_NAMESPACE_ID:localid}
 
 management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: "*"
   endpoint:
     health:
       show-details: ALWAYS

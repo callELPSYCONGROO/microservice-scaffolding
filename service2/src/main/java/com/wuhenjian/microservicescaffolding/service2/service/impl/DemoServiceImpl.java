@@ -1,12 +1,12 @@
 package com.wuhenjian.microservicescaffolding.service2.service.impl;
 
+import com.wuhenjian.microservicescaffolding.service2.service.DemoService;
 import com.wuhenjian.microservicescaffolding.util.domain.dto.BDTO;
 import com.wuhenjian.microservicescaffolding.util.domain.dto.CDTO;
 import com.wuhenjian.microservicescaffolding.util.domain.entity.B;
 import com.wuhenjian.microservicescaffolding.util.domain.entity.C;
-import com.wuhenjian.microservicescaffolding.service2.dao.BMapper;
-import com.wuhenjian.microservicescaffolding.service2.dao.CMapper;
-import com.wuhenjian.microservicescaffolding.service2.service.DemoService;
+import com.wuhenjian.microservicescaffolding.util.mapper.BMapper;
+import com.wuhenjian.microservicescaffolding.util.mapper.CMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,15 +32,19 @@ public class DemoServiceImpl implements DemoService {
 
 	@Override
 	public List<BDTO> getB(Integer aId) {
-		return bMapper.selectByModel(null)
+		return bMapper.selectList(null)
 				.stream()
-				.peek(bdto -> bdto.setCList(getC(bdto.getBid())))
+				.map(b -> {
+					BDTO bdto = (BDTO) b;
+					bdto.setCList(getC(bdto.getBid()));
+					return bdto;
+				})
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<B> getBSingle() {
-		return bMapper.selectByModel(null)
+		return bMapper.selectList(null)
 				.stream()
 				.map(bdto -> (B) bdto)
 				.collect(Collectors.toList());
@@ -48,14 +52,11 @@ public class DemoServiceImpl implements DemoService {
 
 	@Override
 	public List<C> getCSingle() {
-		return cMapper.selectByModel(null)
-				.stream()
-				.map(cdto -> (C) cdto)
-				.collect(Collectors.toList());
+		return cMapper.selectList(null);
 	}
 
 	@Override
 	public List<CDTO> getC(Integer bId) {
-		return cMapper.selectByModel(null);
+		return cMapper.selectList(null).stream().map(c -> (CDTO) c).collect(Collectors.toList());
 	}
 }

@@ -1,16 +1,18 @@
 package com.wuhenjian.microservicescaffolding.util.domain.entity;
 
-import lombok.AllArgsConstructor;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@TableName("C")
 public class C implements Serializable {
+
+    @TableId(type = IdType.INPUT)
     private Integer cid;
 
     private String cname;

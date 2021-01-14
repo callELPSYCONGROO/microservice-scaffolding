@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service1
+          uri: lb://service1
+          predicates:
+            - Path=/s1/**
+        - id: service2
+          uri: lb://service2
+          predicates:
+            - Path=/s2/**

@@ -1,10 +1,8 @@
 package com.wuhenjian.microservicescaffolding.util.domain.dto;
 
 import com.wuhenjian.microservicescaffolding.util.domain.entity.B;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -14,8 +12,6 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class BDTO extends B {
 
 	private List<CDTO> cList;

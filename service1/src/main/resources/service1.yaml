@@ -1,0 +1,79 @@
+#***************配置到nacos中的配置****************
+spring:
+  datasource:
+    username: demo
+    password: demo
+    url: jdbc:mysql://localhost:3306/demo?characterEncoding=utf8&connectTimeout=3000&socketTimeout=5000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    druid:
+      filters: stat
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 1
+      min-idle: 1
+      max-active: 30
+      max-wait: 10000
+      time-between-eviction-runs-millis: 20000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 5000
+          merge-sql: true
+      max-pool-prepared-statement-per-connection-size: 20
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: input
+    banner: false
+  configuration:
+    jdbc-type-for-null: null
+
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 3000
+          semaphore:
+            maxConcurrentRequests: 100
+      circuitBreaker:
+        requestVolumeThreshold: 200
+        sleepWindowInMilliseconds: 1
+        errorThresholdPercentage: 50
+      fallback:
+        isolation:
+          semaphore:
+            maxConcurrentRequests: 50
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 10000
+          numBuckets: 10
+
+ribbon:
+  ReadTimeout: 1000
+  ConnectTimeout: 1000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  MaxTotalHttpConnections: 1000
+  MaxConnectionsPerHost: 500
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

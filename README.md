@@ -33,3 +33,5 @@ Mybatis Plus + Druid + MySql。
 配置了FeignClient，服务熔断。
 
 javax.validation的异常使用统一异常处理进行处理，封装为自定义响应。
+
+\[spring.application.name].yaml文件为nacos中的配置

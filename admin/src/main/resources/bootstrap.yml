@@ -4,35 +4,15 @@ server:
 spring:
   application:
     name: ${APPLICATION_NAME:admin}
-  mail:
-    host: ${MAIL_HOST}
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PWD}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: true
-  boot:
-    admin:
-      notify:
-        mail:
-          # 多个邮箱地址请用 逗号（,）分隔
-          to: ${MAIL_SEND_TO}
-          from: ${MAIL_FROM_FROM}
-          # 配置是否启用邮件通知 false是不起用
-          enabled: ${SPRING_BOOT_ADMIN_NOTIFY_EMAIL_ENABLED:false}
-  security:
-      user:
-        name: ${SECURITY_USERNAME:admin}
-        password: ${SECURITY_PWD:admin}
   cloud:
     nacos:
       server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
-      username: app
-      password: app
+      username: nacos
+      password: nacos
+      config:
+        file-extension: yaml
+        name: ${spring.application.name}
+        namespace: ${NACOS_NAMESPACE_ID:localid}
 
 management:
   endpoints:

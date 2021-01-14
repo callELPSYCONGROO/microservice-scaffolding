@@ -29,9 +29,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-
-        <spring.cloud-version>Hoxton.SR8</spring.cloud-version>
-        <alibaba-nacos-version>2.2.3.RELEASE</alibaba-nacos-version>
+        <spring-cloud-alibaba-dependencies-version>2.2.3.RELEASE</spring-cloud-alibaba-dependencies-version>
         <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
         <druid.version>1.2.4</druid.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
@@ -44,23 +42,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- SpringCloud、Nacos版本使用这个pom来管理；同时与SpringBoot版本要匹配 -->
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud-version}</version>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba-dependencies-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-                <version>${alibaba-nacos-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-                <version>${alibaba-nacos-version}</version>
             </dependency>
 
             <dependency>
@@ -82,6 +70,16 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-core</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
 

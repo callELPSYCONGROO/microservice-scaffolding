@@ -1,0 +1,23 @@
+spring:
+  mail:
+    host: stmp.qq.com
+    username: u@qq.com
+    password: upwd
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  boot:
+    admin:
+      notify:
+        mail:
+          to: 123@qq.com
+          from: 321@qq.com
+          enabled: false
+  security:
+    user:
+      name: admin
+      password: admin
