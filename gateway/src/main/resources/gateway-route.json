@@ -1,0 +1,26 @@
+[
+  {
+    "id": "service1",
+    "uri": "lb://service1",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/s1/**"
+        }
+      }
+    ]
+  },
+  {
+    "id": "service2",
+    "uri": "lb://service2",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/s2/**"
+        }
+      }
+    ]
+  }
+]

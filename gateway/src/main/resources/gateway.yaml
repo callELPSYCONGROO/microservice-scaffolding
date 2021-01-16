@@ -4,12 +4,26 @@ spring:
       discovery:
         locator:
           enabled: true
-      routes:
-        - id: service1
-          uri: lb://service1
-          predicates:
-            - Path=/s1/**
-        - id: service2
-          uri: lb://service2
-          predicates:
-            - Path=/s2/**
+      default-filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: fallbackHandler
+            fallbackUri: forward:/fallback
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter.replenishRate: 1
+            redis-rate-limiter.burstCapacity: 2
+            key-resolver: "#{@apiKeyResolver}"
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: password
+
+hystrix:
+  command:
+    fallbackCmdA:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000

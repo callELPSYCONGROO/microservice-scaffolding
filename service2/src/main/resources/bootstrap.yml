@@ -13,6 +13,8 @@ spring:
         file-extension: yaml
         name: ${spring.application.name}
         namespace: ${NACOS_NAMESPACE_ID:localid}
+      discovery:
+        namespace: ${NACOS_NAMESPACE_ID:localid}
 
 management:
   endpoints:

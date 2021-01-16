@@ -35,6 +35,8 @@
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
         <openfeign.version>2.2.1.RELEASE</openfeign.version>
         <swagger.version>2.9.2</swagger.version>
+        <gateway.version>2.2.4.RELEASE</gateway.version>
+        <hystrix.version>2.2.4.RELEASE</hystrix.version>
 
         <powermock.version>2.0.2</powermock.version>
         <junit.version>4.12</junit.version>
@@ -49,6 +51,18 @@
                 <version>${spring-cloud-alibaba-dependencies-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- 不知道为啥spring-cloud-alibaba-dependencies里面无法依赖到gateway，这里写一个相同版本的 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>${gateway.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+                <version>${hystrix.version}</version>
             </dependency>
 
             <dependency>
