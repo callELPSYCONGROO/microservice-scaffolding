@@ -1,0 +1,34 @@
+server:
+  port: ${SERVER_PORT:10010}
+
+spring:
+  application:
+    name: ${APPLICATION_NAME:service-doc}
+  cloud:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: ${NACOS_NAMESPACE_ID:localid}
+    gateway:
+      discovery:
+        locator:
+          #          enabled: true
+          lowerCaseServiceId: true
+      routes:
+        - id: service1
+          uri: lb://service1
+          predicates:
+            - Path=/s1/**
+          filters:
+            - StripPrefix=1
+        - id:  service2
+          uri: lb://service2
+          predicates:
+            - Path=/s2/**
+          filters:
+            - StripPrefix=1
+logging:
+  level:
+    org.springframework.cloud.gateway: debug

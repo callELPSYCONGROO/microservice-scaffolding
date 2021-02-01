@@ -31,10 +31,7 @@ public class DemoServiceImpl implements DemoService {
 
 	@Override
 	public List<A> getASingle() {
-		return aMapper.selectList(null)
-				.stream()
-				.map(adto -> (A) adto)
-				.collect(Collectors.toList());
+		return aMapper.selectList(null);
 	}
 
 	@Override

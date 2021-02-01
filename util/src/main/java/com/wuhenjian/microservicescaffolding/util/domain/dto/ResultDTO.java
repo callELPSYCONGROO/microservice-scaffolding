@@ -1,7 +1,8 @@
 package com.wuhenjian.microservicescaffolding.util.domain.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,12 +13,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ApiModel(value = "响应结果", description = "统一响应")
 public class ResultDTO {
 
+	@ApiModelProperty("响应码")
 	private Integer code;
 
+	@ApiModelProperty("响应信息")
 	private String msg;
 
+	@ApiModelProperty("响应数据")
 	private Object data;
 
 	public static ResultDTO success(Object data) {

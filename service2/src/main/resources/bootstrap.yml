@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: ${APPLICATION_NAME:service2}
+    name-desc: ${APPLICATION_NAME_DESC:服务2}
   cloud:
     nacos:
       server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}

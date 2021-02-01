@@ -10,6 +10,8 @@ SpringCloud微服务系统脚手架。
 
 * demo service 服务
 
+* service doc 服务
+
 ### 注册与配置中心
 
 使用ALIBABA-NACOS作为注册与配置中心。
@@ -35,3 +37,7 @@ Mybatis Plus + Druid + MySql。
 javax.validation的异常使用统一异常处理进行处理，封装为自定义响应。
 
 \[spring.application.name].yaml文件为nacos中的配置
+
+### service doc 服务
+
+swagger文档输出网关

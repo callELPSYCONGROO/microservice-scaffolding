@@ -3,9 +3,12 @@ package com.wuhenjian.microservicescaffolding.service2;
 import com.wuhenjian.microservicescaffolding.util.domain.entity.A;
 import com.wuhenjian.microservicescaffolding.util.domain.entity.B;
 import com.wuhenjian.microservicescaffolding.util.domain.entity.C;
-import com.wuhenjian.microservicescaffolding.service2.dao.AMapper;
-import com.wuhenjian.microservicescaffolding.service2.dao.BMapper;
-import com.wuhenjian.microservicescaffolding.service2.dao.CMapper;
+import com.wuhenjian.microservicescaffolding.util.mapper.AMapper;
+import com.wuhenjian.microservicescaffolding.util.mapper.BMapper;
+import com.wuhenjian.microservicescaffolding.util.mapper.CMapper;
+import com.wuhenjian.microservicescaffolding.util.repository.ARepository;
+import com.wuhenjian.microservicescaffolding.util.repository.BRepository;
+import com.wuhenjian.microservicescaffolding.util.repository.CRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,12 @@ public class Service2ApplicationTests {
 	private BMapper bMapper;
 	@Autowired
 	private CMapper cMapper;
+	@Autowired
+	private ARepository aRepository;
+	@Autowired
+	private BRepository bRepository;
+	@Autowired
+	private CRepository cRepository;
 
 	@Test
 	public void insert() {
@@ -58,10 +67,10 @@ public class Service2ApplicationTests {
 			}
 		}
 
-		aMapper.insertBatch(aList);
-		bMapper.insertBatch(bList);
+		aRepository.saveBatch(aList);
+		bRepository.saveBatch(bList);
 		cList.stream()
 				.collect(Collectors.groupingBy(C::getBid))
-				.forEach((bId, cs) -> cMapper.insertBatch(cs));
+				.forEach((bId, cs) -> cRepository.saveBatch(cs));
 	}
 }

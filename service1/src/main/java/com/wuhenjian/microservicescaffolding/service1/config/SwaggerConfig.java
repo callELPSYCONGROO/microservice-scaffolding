@@ -1,43 +1,47 @@
 package com.wuhenjian.microservicescaffolding.service1.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
- * API接口文档启动配置
- * @author: Overload
- * @review:
- * @date: 2018/6/22 10:46
- * @version: 1.0
+ * Swagger 配置
+ *
+ * @author 無痕剑
+ * @date 2021/1/21 0021 10:57
  */
-@EnableSwagger2
 @Configuration
+@EnableSwagger2WebMvc
+@Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfig {
 
+	@Value("${spring.application.name}")
+	private String applicationName;
+
+	@Value("${spring.application.name-desc}")
+	private String applicationNameDesc;
+
 	@Bean
-	public Docket api(ApiInfo apiInfo) {
+	public Docket docket() {
+		ApiInfo apiInfo = new ApiInfoBuilder()
+				.title(applicationName)
+				.description(applicationNameDesc)
+				.build();
 		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(apiInfo)
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.wuhenjian.microservicescaffolding.service1.controller"))
 				.paths(PathSelectors.any())
-				.build();
-	}
-
-	@Bean
-	public ApiInfo apiInfo() {
-		String description = "demo服务接口文档描述";
-		return new ApiInfoBuilder()
-				.title("DEMO服务API接口文档")
-				.description(description)
-				.version("1.0")
-				.build();
+				.build()
+				;
 	}
 }
